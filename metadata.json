@@ -1,0 +1,6 @@
+{
+  "name": "Twende Zambia UK",
+  "description": "Independent community organization supporting Zambians in the UK during bereavement and funeral repatriation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "members": {
+      "title": "Members",
+      "description": "User profiles for Twende Zambia UK members",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Auth UID" },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "member"] },
+        "membershipType": { "type": "string", "enum": ["adult", "child"] },
+        "status": { "type": "string", "enum": ["pending", "active", "expired"] },
+        "joinedAt": { "type": "string", "format": "date-time" },
+        "eligibilityDate": { "type": "string", "format": "date-time" },
+        "whatsappGroupAccess": { "type": "boolean" },
+        "lastContributionDate": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "fullName", "email", "role", "membershipType", "status"]
+    },
+    "contributions": {
+      "title": "Contributions",
+      "description": "Record of member contributions",
+      "type": "object",
+      "properties": {
+        "memberId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["membership_fee", "funeral_contribution"] },
+        "paymentId": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "completed", "failed"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["memberId", "amount", "type", "status"]
+    },
+    "announcements": {
+      "title": "Announcements",
+      "description": "Community news and funeral alerts",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "authorId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "type": { "type": "string", "enum": ["news", "funeral_alert"] }
+      },
+      "required": ["title", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/members/{userId}": {
+      "schema": "members",
+      "description": "Primary member profiles"
+    },
+    "/contributions/{contributionId}": {
+      "schema": "contributions",
+      "description": "Financial records"
+    },
+    "/announcements/{announcementId}": {
+      "schema": "announcements",
+      "description": "Community posts"
+    }
+  }
+}
